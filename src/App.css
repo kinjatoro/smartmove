@@ -1,0 +1,170 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.RotatingLogo {
+  width: 400px; 
+  height: 400px;
+  top: -54px;  
+  right: 178px; 
+  position: absolute;  
+  z-index: 2;
+  animation: swing 6s infinite ease-in-out;
+}
+
+@keyframes swing {
+  0% {
+    transform: rotate(10deg); /* Inicia en 30 grados a la derecha */
+  }
+  50% {
+    transform: rotate(-10deg); /* Gira hasta -30 grados a la izquierda */
+  }
+  100% {
+    transform: rotate(10deg); /* Vuelve a 30 grados a la derecha */
+  }
+}
+
+
+
+.StaticLogo {
+  top: -133px;
+  transform: rotate(25deg);
+  width: 500px; 
+  height: 500px;
+  position: absolute; 
+  z-index: 1; 
+  right:134px;
+  animation: fadeIn 1s ease-in-out;
+  
+}
+
+.Musica {
+  position: absolute;
+  width: 50px; 
+  height: 50px;
+  top: 348px;  
+  right: 563px;
+}
+
+.Musica2 {
+  position: absolute;
+  width: 65px; 
+  height: 65px;
+  top: 318px;  
+  right: 178px;
+}
+
+.Musica3 {
+  position: absolute;
+  width: 50px; 
+  height: 50px;
+  top: -62px;  
+  right: 551px;
+}
+
+.Musica4 {
+  position: absolute;
+  width: 50px; 
+  height: 50px;
+  top: -41px;  
+  right: 164px;
+}
+
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (min-width: 1200px) {
+  .Altura{
+    height: 300px;
+    margin-left: 180px;
+    animation: caida 1s ease-in-out, fadeIn 1s ease-in-out; 
+  }}
+
+@keyframes color-change-animation {
+  0% {
+    color:#212B36 ; 
+  }
+
+  25% {
+    color:#1976d2 ; 
+  }
+
+  50% {
+    color:#1976d2 ;
+  }
+
+  75% {
+    color:#1976d2 ; 
+  }
+
+  100% {
+    color: #212B36; 
+  }
+}
+
+
+.color-change {
+  animation: color-change-animation 4s linear infinite; 
+}
+
+@media (max-width: 1200px) {
+  .Ocultar {
+    display: none; 
+  }}
+
+@keyframes caida {
+  from {
+    transform: translateY(-5%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+
+
+
+

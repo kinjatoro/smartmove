@@ -1,0 +1,12 @@
+trigger:
+- main
+
+pool:
+  name: Default # Asegúrate de que este es el nombre correcto de tu pool
+
+steps:
+- checkout: git://github.com/kinjatoro/SEMINARIO
+
+- script: |
+    echo "Hello, World!"
+  displayName: 'Run a one-line script'

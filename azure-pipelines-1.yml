@@ -1,0 +1,28 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  name: Default # Cambia esto al nombre de tu grupo de agentes, si es necesario.
+  demands:
+    - agent.name -equals ip-172-31-31-241
+
+steps:
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '5.x'
+    installationPath: $(Agent.ToolsDirectory)/dotnet
+
+- script: |
+    echo Hello, world!
+    dotnet --version
+  displayName: 'Run a one-line script'
+
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'MyAzureSubscription'
+    appName: 'my-app'
+    package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
+
