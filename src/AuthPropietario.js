@@ -3,7 +3,7 @@ import jwtDecode from 'jwt-decode';
 
 const PropietarioContext = createContext();
 
-export function AdminProvider({ children }) {
+export function PropietarioProvider({ children }) {
   const [propietario, setPropietario] = useState(false);
 
   useEffect(() => {
@@ -13,7 +13,7 @@ export function AdminProvider({ children }) {
     // decodifica el token (si lo encuentra)
     if (jwtToken) {
       const decodedToken = jwtDecode(jwtToken);
-      if (decodedToken.rol === "propietario" || decodedToken.rol === "CEO"){
+      if (decodedToken.rol === "propietario"){
         setPropietario(true);
       }
 

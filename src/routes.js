@@ -26,6 +26,15 @@ import { useAuth } from './Auth'
 import { useOnBoarding } from './OnBoarding'
 import { useMyBar } from './TengoBarAuth'
 import { useMyAdmin } from './TengoAdminAuth'
+
+
+import {useCEO} from './AuthCEO'
+import {useLegales} from './AuthLegales'
+import {useMudanzas} from './AuthMudanzas'
+import {usePropietario} from './AuthPropietario'
+import {useEmpleado} from './AuthEmpleado'
+
+
 import  DashboardAppPage  from './pages/DashboardAppPage'
 import  DashboardAppPage2  from './pages/DashboardAppPage2'
 
@@ -39,10 +48,17 @@ import DashboardPageInquilino from './pages/DashboardPageInquilino';
 // ----------------------------------------------------------------------
 
 export default function Router() {
-  const { auth } = useAuth();
+  
   const { onBoar } = useOnBoarding();
   const { myBar } = useMyBar();
   const { myAdmin } = useMyAdmin();
+
+  const { auth, setAuth } = useAuth(); // inquilino
+  const {CEO, setCEO} = useCEO();
+  const {empleado, setEmpleado} = useEmpleado();
+  const {legales} = useLegales();
+  const {mudanzas, setMudanzas} = useMudanzas();
+  const {propietario, setPropietario} = usePropietario();
   
   const routes = useRoutes([
 
@@ -55,6 +71,14 @@ export default function Router() {
         { path: 'bares', element: <BaresPage /> },
         { path: 'eventos/:idBlog', element: <IndividualBlog />,},
         { path: 'bares/:idBar', element: <IndividualBar />,},
+        { path: 'legales', element: <DashboardPageLegales/>}, 
+        { path: 'ceo', element: <DashboardPageCEO/>}, 
+        { path: 'mudanzas', element: <DashboardPageMudanza/>}, 
+        { path: 'propietario', element: <DashboardPagePropietario/>}, 
+        { path: 'inquilino', element: <DashboardPageInquilino/>}, 
+        { path: 'empleado', element: <DashboardPageEmpleado/>}, 
+         
+        
  
       ],
     },
@@ -101,17 +125,34 @@ export default function Router() {
       element: onBoar ? <SimpleLayout /> : <Navigate to="/registro/bar/onboarding" />,
       children: [
         {element: <Navigate to="/inicio" />, index: true},
-        {path: 'bar', element: <LoginPageBar />,},
-        {path: 'cliente', element: <LoginPage />,},
+        {path: 'cliente', element: <LoginPageBar />,},
+        {path: 'bar', element: <LoginPage />,},
       ],
     },
+
+    
     {
-    path: '/dashboardsEmpleado', element: <DashboardPageEmpleado/>
+
+    path: '/dashboardsEmpleado', 
+    element: empleado ? <SimpleLayout /> : <Navigate to="/inicio" />,
+    children: [
+    {element: <DashboardPageEmpleado/>
+    }],
     },
 
-    {
-    path: '/dashboardsLegales', element: <DashboardPageLegales/>
-    },
+    /* {
+      path: '/dashboardsLegales',
+      element: legales ? <DashboardPageLegales /> : <Navigate to="/inicio" />,
+    }, */
+     {
+    path: '/dashboards', 
+    element: legales ? <DashboardLayout /> : <Navigate to="/inicio" />,
+    children: [
+    {element: <Navigate to="/inicio" />, index: true},
+    {path: 'legales', element: <DashboardPageLegales/>
+    }],
+    }, 
+ 
     {
     path: '/dashboardsCEO', element: <DashboardPageCEO/>
     },
@@ -123,7 +164,7 @@ export default function Router() {
     },
     {
     path: '/dashboardsInquilino', element: <DashboardPageInquilino/>
-    },
+    }, 
   
   
   

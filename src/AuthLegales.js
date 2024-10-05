@@ -3,17 +3,18 @@ import jwtDecode from 'jwt-decode';
 
 const LegalesContext = createContext();
 
-export function AdminProvider({ children }) {
+export function LegalesProvider({ children }) {
   const [legales, setLegales] = useState(false);
 
   useEffect(() => {
     // Verifica si existe un token JWT en la cookie
     const jwtToken = getJwtToken();
+    console.log(jwtToken, 'kukardo')
     
     // decodifica el token (si lo encuentra)
     if (jwtToken) {
       const decodedToken = jwtDecode(jwtToken);
-      if (decodedToken.rol === "legales" || decodedToken.rol === "CEO"){
+      if (decodedToken.rol === "legales"){
         setLegales(true);
       }
 

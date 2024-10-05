@@ -10,10 +10,15 @@ import { LoadingButton } from '@mui/lab';
 
 // components
 import Iconify from '../../../components/iconify';
-
-import { useAuth } from '../../../Auth'
 import { useMyBar } from '../../../TengoBarAuth'
-import { useOnBoarding } from '../../../OnBoarding'
+
+
+import { useAuth } from '../../../Auth' // INQUILINO
+import {useCEO} from '../../../AuthCEO'
+import {useLegales} from '../../../AuthLegales'
+import {useMudanzas} from '../../../AuthMudanzas'
+import {usePropietario} from '../../../AuthPropietario'
+import {useEmpleado} from '../../../AuthEmpleado'
 
 // ----------------------------------------------------------------------
 
@@ -22,11 +27,19 @@ export default function LoginFormBar() {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const { auth, setAuth } = useAuth();
+
 
   const { myBar, setMyBar } = useMyBar();
 
-  const { onBoar, setOnBoar } = useOnBoarding();
+  
+
+  const { auth, setAuth } = useAuth(); // inquilino
+  const {CEO, setCEO} = useCEO();
+  const {empleado, setEmpleado} = useEmpleado();
+  const {legales, setLegales} = useLegales();
+  const {mudanzas, setMudanzas} = useMudanzas();
+  const {propietario, setPropietario} = usePropietario();
+  
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -67,36 +80,79 @@ export default function LoginFormBar() {
 
     try {
     
-      const response = await axios.post('https://music-lovers-production.up.railway.app/business/login/', {
+      const response = await axios.post('https://back-da2-production.up.railway.app/api/login', {
         email,
         password,
     
       });
+      console.log(response.data);
       // Crea el token
-      const token = response.data.access;
+      const token = response.data.token;
       if (token){
+        setAuth(true)
         document.cookie = `jwtToken=${token}; path=/; SameSite=Strict;`;
-        setAuth(true);
-        setMyBar(true);
+        if (response.data.rol === 'inquilino'){
+          setAuth(true);
+          setMudanzas(false);
+          setEmpleado(false);
+          setPropietario(false);
+          setCEO(false);
+          setLegales(false);
+        }
+
+        if (response.data.rol === 'mudanzas'){
+          setMudanzas(true);
+          setEmpleado(false);
+          setPropietario(false);
+          setCEO(false);
+          setLegales(false);
+          
+        }
+
+        if (response.data.rol === 'empleado'){
+          setMudanzas(false);
+          setEmpleado(true);
+          setPropietario(false);
+          setCEO(false);
+          setLegales(false);
+          
+        }
+
+        if (response.data.rol ==='propietario'){
+          setMudanzas(false);
+          setEmpleado(false);
+          setPropietario(true);
+          setCEO(false);
+          setLegales(false);
+    
+        }
+
+        if (response.data.rol ==='CEO'){
+          setMudanzas(false);
+          setEmpleado(false);
+          setPropietario(false);
+          setCEO(true);
+          setLegales(false);
+
+        }
+
+        if (response.data.rol === 'legales'){
+          setMudanzas(false);
+          setEmpleado(false);
+          setPropietario(false);
+          setCEO(false);
+          setLegales(true);
+        }
+        
 
         const decodedToken = jwtDecode(token);
       
-        if (decodedToken.user_type === 1 && decodedToken.business_id === null){
-          setOnBoar(false);
-        }
+      
 
         navigate('/inicio');
       } 
 
-      if (response.data.detail && response.data.detail[0] === "No user with this email exists."){
-        alert('La dirección de correo electrónico no está registrada');  
-      } 
-      if (response.data.detail && response.data.detail[0] === "No active account found with the given credentials") {
-        alert('La contraseña no es válida'); 
-      }
-      if (response.data.detail && response.data.detail[0] === "Access denied for this user type.") {
-        alert('El mail ingresado está registrado como cliente'); 
-      }
+      
       
 
     } catch (error) {
@@ -135,8 +191,20 @@ export default function LoginFormBar() {
     
 
   return (
+
+    
     <>
+
       <Stack spacing={3}>
+      <Typography variant="h3" gutterBottom>
+              Iniciar Sesión
+            </Typography>
+            <Typography variant="body2" sx={{ mb: 2 }}>
+              ¿No tenés cuenta? {''}
+              <Link variant="subtitle2" onClick={handleClick} sx={{ cursor: 'pointer' }}>Registrate</Link>
+            </Typography>
+
+        
         <TextField name="correo"
            label="Correo electrónico"
            value={email}

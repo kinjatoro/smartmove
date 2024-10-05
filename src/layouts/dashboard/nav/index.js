@@ -17,16 +17,29 @@ import Logo from '../../../components/logo';
 import Scrollbar from '../../../components/scrollbar';
 import NavSection from '../../../components/nav-section';
 //
+
+
 import navConfig from './config';
 import navConfigLogged from './configLogged';
-import navConfigLoggedBar from './configLoggedBar'; 
-import navConfigLoggedAdmin from './configLoggedAdmin'; 
+import navConfigLoggedCEO from './configLoggedCEO'; 
+import navConfigLoggedLegales from './configLoggedLegales'; 
+import navConfigLoggedMudanza from './configLoggedMudanza'; 
+import navConfigLoggedPropietario from './configLoggedPropietario';
+import navConfigLoggedEmpleado from './configLoggedEmpleado';
+
+
 
 import { useAuth } from '../../../Auth'
 import { useMyBar } from '../../../TengoBarAuth';
 import { useMyAdmin } from '../../../TengoAdminAuth';
 import { useOnBoarding } from '../../../OnBoarding';
 
+
+import {useCEO} from '../../../AuthCEO'
+import {useLegales} from '../../../AuthLegales'
+import {useMudanzas} from '../../../AuthMudanzas'
+import {usePropietario} from '../../../AuthPropietario'
+import {useEmpleado} from '../../../AuthEmpleado'
 
 // ----------------------------------------------------------------------
 
@@ -54,11 +67,17 @@ export default function Nav({ openNav, onCloseNav }) {
 
   const isDesktop = false;
 
-  const { auth, setAuth } = useAuth();
+  
   const { myBar, setMyBar } = useMyBar();  
   const { myAdmin, setMyAdmin } = useMyAdmin();  
   const {onBoar, setOnBoar} = useOnBoarding();
 
+  const { auth, setAuth } = useAuth(); // inquilino
+  const {CEO, setCEO} = useCEO();
+  const {empleado, setEmpleado} = useEmpleado();
+  const {legales, setLegales} = useLegales();
+  const {mudanzas, setMudanzas} = useMudanzas();
+  const {propietario, setPropietario} = usePropietario();
 
   function getJwtToken() {
     const jwtCookie = document.cookie.split('; ').find(row => row.startsWith('jwtToken='));
@@ -180,22 +199,23 @@ export default function Nav({ openNav, onCloseNav }) {
       </Box>) : (<></>)}
 
       
-            {
-        auth ? (
-          myAdmin ? (
-            myBar ? (
-             
-              <NavSection data={navConfigLoggedBar} />
-            ) : (
-              <NavSection data={navConfigLoggedAdmin} />
-            )
-          ) : (
-            <NavSection data={navConfigLogged} />
-          )
-        ) : (
-          <NavSection data={navConfig} />
-        )
-      }
+      {
+  auth && (
+    <>
+      {CEO && <NavSection data={navConfigLoggedCEO} />}
+      {legales && <NavSection data={navConfigLoggedLegales} />}
+      {mudanzas && <NavSection data={navConfigLoggedMudanza} />}
+      {propietario && <NavSection data={navConfigLoggedPropietario} />}
+      {empleado && <NavSection data={navConfigLoggedEmpleado} />}
+
+      {!CEO && !legales && !mudanzas && !propietario && !empleado && (
+        <NavSection data={navConfigLogged} />
+      )}
+    </>
+  )
+}
+
+
   
         
 
@@ -234,24 +254,43 @@ export default function Nav({ openNav, onCloseNav }) {
          )}      </Stack>
      </Box> 
 
-         {/*
+         
        {auth ? (
           <p>Auth es verdadera.</p>
         ) : (
           <p>Auth es falsa.</p>
         )}
 
-    {myAdmin ? (
-          <p>myAdmin es verdadera.</p>
+    {legales ? (
+          <p>legales es verdadera.</p>
         ) : (
-          <p>myAdmin es falsa.</p>
+          <p>legales es falsa.</p>
         )}
 
-    {myBar ? (
-          <p>myBar es verdadera.</p>
+    {CEO ? (
+          <p>CEO es verdadera.</p>
         ) : (
-          <p>myBar es falsa.</p>
-        )} */}
+          <p>CEO es falsa.</p>
+        )} 
+
+    {mudanzas ? (
+          <p>mudanzas es verdadera.</p>
+        ) : (
+          <p>mudanzas es falsa.</p>
+        )} 
+
+        {propietario ? (
+          <p>propietario es verdadera.</p>
+        ) : (
+          <p>propietario es falsa.</p>
+        )} 
+
+        {empleado ? (
+          <p>empleado es verdadera.</p>
+        ) : (
+          <p>empleado es falsa.</p>
+        )} 
+    
 
         
 

@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import jwtDecode from 'jwt-decode';
 import { faker } from '@faker-js/faker';
 import '../App.css';
 // @mui
@@ -40,6 +41,9 @@ export default function LandingPage() {
   const [mostrar, setMostrar] = useState(true);
   const [iconoKey, setIconoKey] = useState(0);
 
+
+  const [decodedToken, setDecodedToken] = useState('login/cliente');
+
   useEffect(() => {
     const interval = setInterval(() => {
       setMostrar(false); // Comienza a ocultar la palabra actual
@@ -58,9 +62,27 @@ export default function LandingPage() {
   const colorPalabra = colores[palabraActualIndex];
   const iconoActual = iconos[iconoActualIndex];
 
+  useEffect(() => {
+    // Verifica si existe un token JWT en la cookie
+    const jwtToken = getJwtToken();
+    
+    // decodifica el token (si lo encuentra)
+    if (jwtToken) {
+      setDecodedToken(jwtDecode(jwtToken).rol);
+      
+    }
+  }, []);
+
+
+  function getJwtToken() {
+    const jwtCookie = document.cookie.split('; ').find(row => row.startsWith('jwtToken='));
+    return jwtCookie ? jwtCookie.split('=')[1] : null;
+  }
+
 
   const handleClick = () => {
-    navigate('/login/cliente');  // para ver publicaciones (alumno)
+    console.log(decodedToken);
+    navigate(`/${decodedToken}`);  // para ver publicaciones (alumno)
   }
   
   const handleClick2 = () => {

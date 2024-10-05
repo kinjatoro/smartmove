@@ -3,7 +3,7 @@ import jwtDecode from 'jwt-decode';
 
 const CEOContext = createContext();
 
-export function AdminProvider({ children }) {
+export function CEOProvider({ children }) {
   const [CEO, setCEO] = useState(false);
 
   useEffect(() => {
@@ -13,7 +13,7 @@ export function AdminProvider({ children }) {
     // decodifica el token (si lo encuentra)
     if (jwtToken) {
       const decodedToken = jwtDecode(jwtToken);
-      if (decodedToken.rol === "CEO" || decodedToken.rol === "CEO"){
+      if (decodedToken.rol === "CEO"){
         setCEO(true);
       }
 
