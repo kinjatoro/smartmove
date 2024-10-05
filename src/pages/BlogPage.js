@@ -292,7 +292,7 @@ export default function BlogPage() {
               
             <Box sx={{textAlign: "right"}}>
               
-            <Button disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} onClick={handleOpenFilter}>
+            <Button disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} >
                 Filtrar&nbsp;
              </Button>
 
@@ -301,7 +301,7 @@ export default function BlogPage() {
                 <Button
                   color="inherit"
                   disableRipple
-                  onClick={handleOpen}
+                  
                   endIcon={<Iconify icon={open ? 'eva:chevron-up-fill' : 'eva:chevron-down-fill'} 
                    
                   />

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { AuthProvider } from './Auth';
@@ -35,8 +35,6 @@ export default function App() {
   const [legales, setLegales] = useState(false);
   const [mudanzas, setMudanzas] = useState(false);
   const [propietario, setPropietario] = useState(false);
-  
-
 
   return (   
     

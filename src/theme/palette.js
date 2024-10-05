@@ -17,13 +17,14 @@ const GREY = {
 };
 
 const PRIMARY = {
-  lighter: '#D1E9FC',
-  light: '#76B0F1',
-  main: '#1976d2',
-  dark: '#BA2A12',
-  darker: '#061B64',
+  lighter: '#E3F2FD',
+  light: '#64B5F6',
+  main: '#1976D2',  // Este es el mismo que tienes
+  dark: '#0D47A1',
+  darker: '#002171',
   contrastText: '#fff',
 };
+
 
 const SECONDARY = {
   lighter: '#D6E4FF',
