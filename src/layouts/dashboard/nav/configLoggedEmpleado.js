@@ -10,7 +10,7 @@ const navConfig = [
     icon: <Iconify icon={"eva:heart-fill"} />,   
   },
   {
-    title: 'Administracion interna',
+    title: 'Administración interna',
     path: '/empleado',
     icon: <Iconify icon={"mdi:worker"} />,  
   },

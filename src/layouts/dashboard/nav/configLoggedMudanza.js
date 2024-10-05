@@ -11,7 +11,7 @@ const navConfig = [
   },
   {
     title: 'Mudanza',
-    path: '/mudanza',
+    path: '/mudanzas',
     icon: <Iconify icon={"fa-solid:truck-moving"} />,  
   },
 ];
