@@ -4,7 +4,7 @@ import { sample } from 'lodash';
 // ----------------------------------------------------------------------
 
 const CLASES = [
-  'CEO','Legales', 'Mudanzas', 'Propietario', 'Empleados', 'Inquilinos'
+  'CEO','Legales', 'Mudanzas', 'Propietario', 'Empleado', 'Inquilino'
 ];
 
 

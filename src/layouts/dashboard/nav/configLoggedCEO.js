@@ -10,7 +10,7 @@ const navConfig = [
     icon: <Iconify icon={"eva:heart-fill"} />,   
   },
   {
-    title: 'CEO',
+    title: 'Menú',
     path: '/ceo',
     icon: <Iconify icon={'material-symbols-light:business-center-sharp'} />
   },

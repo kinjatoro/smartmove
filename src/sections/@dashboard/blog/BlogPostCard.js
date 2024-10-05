@@ -100,7 +100,13 @@ const fechaFormateada = `${dia}/${mes}-${anio}-${hora}:${minutos}`;
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/eventos/${post.id}`);
+    if (title === 'CEO'){
+      navigate('/ceodashb')} 
+    else {
+      navigate(`/${title}`);
+    }
+
+    
   };
 
   return (
@@ -144,7 +150,7 @@ const fechaFormateada = `${dia}/${mes}-${anio}-${hora}:${minutos}`;
           }}
         >
           
-          <Typography  gutterBottom variant="h6" sx={{ color: 'black', mt: -1 }}>
+          <Typography  gutterBottom variant="h6" sx={{ color: 'black', mt: -1 }} align="center">
             {title}            
            </Typography>
           

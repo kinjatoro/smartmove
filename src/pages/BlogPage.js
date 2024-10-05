@@ -260,13 +260,13 @@ export default function BlogPage() {
   
     <>
       <Helmet>
-        <title> Eventos | SmartMove </title>
+        <title> Lista de dashboards | SmartMove </title>
       </Helmet>
 
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={2}>
           <Typography variant="h3" gutterBottom>
-            Eventos
+            Lista de dashboards
           </Typography>
           
         </Stack>
