@@ -9,7 +9,7 @@ export function LegalesProvider({ children }) {
   useEffect(() => {
     // Verifica si existe un token JWT en la cookie
     const jwtToken = getJwtToken();
-    console.log(jwtToken, 'kukardo')
+    console.log(jwtToken)
     
     // decodifica el token (si lo encuentra)
     if (jwtToken) {

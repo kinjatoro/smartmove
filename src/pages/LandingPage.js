@@ -24,6 +24,9 @@ import {
 
 import gorro from '../gorro.png';
 import milogo from '../galicia_1.svg';
+import milogo1 from '../sm.svg';
+import milogo2 from '../sm2.svg';
+import milogo4 from '../sm4.svg';
 import musica from '../musica.png';
 import { useAuth } from '../Auth';
 
@@ -131,7 +134,7 @@ export default function LandingPage() {
             
           
 
-          <img className='RotatingLogo' src={milogo} alt="Rotating Logo"/>
+          <img className='RotatingLogo' src={milogo2} alt="Rotating Logo"/>
           </Grid>
           
 

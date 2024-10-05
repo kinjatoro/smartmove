@@ -64,9 +64,9 @@ export default function DashboardAppPage() {
 
           eventHandlers={
             new Map([
-              ['loaded', function () { console.log('Report loaded'); }],
-              ['rendered', function () { console.log('Report rendered'); }],
-              ['error', function (event) { console.log(event.detail); }]
+              ['loaded', function () { console.log('Report loaded'); window.postMessage("Report loaded")}],
+              ['rendered', function () { console.log('Report rendered'); window.postMessage("Report rendered")}],
+              ['error', function (event) { console.log(event.detail); window.postMessage("Report error")}]
             ])
           }
 
